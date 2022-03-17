@@ -1,14 +1,17 @@
 package org.launchcode.claimstracker.services;
 
-import org.apache.catalina.User;
+import org.launchcode.claimstracker.data.UserRepository;
+import org.launchcode.claimstracker.models.Bill;
+import org.launchcode.claimstracker.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.launchcode.claimstracker.data.UserRepository;
-import java.util.*;
+
 import javax.servlet.http.HttpSession;
+import java.util.*;
 
 @Service
 public class UserService {
+
     @Autowired
     private UserRepository userRepository;
 
@@ -19,6 +22,7 @@ public class UserService {
         if (userId == null) {
             return null;
         }
+
         Optional<User> user = userRepository.findById(userId);
 
         if (user.isEmpty()) {
@@ -41,6 +45,4 @@ public class UserService {
     public void saveUser(User user) {
         userRepository.save(user);
     }
-
-
 }

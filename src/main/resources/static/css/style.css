@@ -1,0 +1,133 @@
+header, .project:not(:last-child) {
+  border-bottom: 3px solid #ccc;
+}
+
+table{
+margin-left:10%;
+margin-right:10%
+}
+
+.registerpage{
+padding:5%;
+}
+
+.even{
+background-color:#757575;
+}
+
+.odd{
+background-color:a6a6a6;
+}
+
+.sample-chart{
+width:50%;
+max-width:900px;
+min-width:500px;
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
+
+.sample-chart{
+width:50%;
+max-width:900px;
+min-width:500px;
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
+
+h4{
+text-align:center;
+}
+
+.no-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 100%;
+}
+
+.no-button:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.dollar-amount {
+  color: #056605;
+  font-weight: bold;
+  margin-left: -5px;
+}
+
+.section{
+background-color:rgb(46, 46, 46);
+border-radius:10px;
+margin: 0%;
+padding: 1%;
+}
+
+.table-header:hover{
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+input:hover{
+  cursor: pointer;
+}
+
+label:hover{
+  cursor: pointer;
+}
+
+input, select, form{
+  color: white;
+}
+
+form:focus, input:focus {
+  color: white;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: rgb(255, 255, 255);
+  -webkit-box-shadow: 0 0 0px 1000px grey inset;
+  transition: background-color 5000s ease-in-out 0s;
+  border-bottom: 2px solid white;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px grey inset !important;
+}
+
+#nav a{
+  color: #CECECE;;
+}
+
+#nav a:visited{
+color: o;
+}
+
+#nav a:hover{
+  color: #CECECE;;
+}
+
+#nav .active {
+  color: #CECECE;;
+}
+
+@media only screen and (max-width: 770px) {
+table{
+margin-left:0%;
+margin-right:0%
+}
+}

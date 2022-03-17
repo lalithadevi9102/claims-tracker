@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Claims Tracker</title>
+    <link href="css/jass.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/chart.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+    <link rel = "stylesheet"
+          href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <script type = "text/javascript"
+            src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js" integrity="sha512-qzgd5cYSZcosqpzpn7zF2ZId8f/8CHmFKZ8j7mU4OUXTNRd5g+ZHBPsgKEwoqxCtdQvExE5LprwwPAgoicguNg==" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+
+<nav>
+    <div class="nav-wrapper #424242 grey darken-3">
+        <a href="#" class="brand-logo ">Claims Tracker</a>
+        <ul id="nav-mobile" class="right hide-on-sm-and-down">
+            <li><a href="/bill/create-bill">Add a Claim</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!------------------------ Insert first name into H2 ------------------------>
+<h2 th:text="${username} + '\'s Dashboard'">Welcome to your Dashboard</h2>
+
+<!------------------------ Sample table, should eventual use database data ------------>
+<div class="col-md-8 bill-list">
+    <table class="tablesorter">
+        <thead>
+        <tr>
+            <th class="table-header">Name</th>
+            <th class="table-header">Amount Due</th>
+            <th class="table-header">Due Date</th>
+            <th class="table-header">Claim Type</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr th:each="bills : ${bill}" class="table-row">
+            <td th:text="${bills.name}"></td>
+            <td th:text="${bills.amount}"></td>
+            <td th:text="${bills.billDueDate}"></td>
+            <td th:text="${bills.type}"></td>
+            <form method = "post">
+                <td>
+                    <button type="submit" name="billIds" th:value="${bills.id}" class="btn btn-sm btn-danger">DELETE</button>
+                </td>
+            </form>
+        </tr>
+
+        </tbody>
+    </table>
+    <a href="/bill/create-bill"><button class="add-bill-button btn btn-sm btn-danger">Create a new Claim</button></a>
+</div>
+<!------------------------ Sample chart, should eventually use database data and chart API------------>
+<h4>Outstanding Claims?</h4>
+<section class="chartContainer">
+    <form id="form1" name="form1" onchange="drawChart()">
+        <select id="thedropdown">
+        </select>
+    </form>
+    <div id="piechart" class="chart"></div>
+</section>
+<h4 id="totalExpenses">Total Claims Amount</h4>
+<th:block th:replace="fragments :: chart-script"></th:block>
+</body>
+<script src="js/profile.js"></script>
+</html>

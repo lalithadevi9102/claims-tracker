@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/> <!-- Note the closing '/' character -->
+    <title>Claims Tracker</title>
+    <link href="../css/jass.css" rel="stylesheet" />
+    <link href="../css/style.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+    <link rel = "stylesheet"
+          href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <script type = "text/javascript"
+            src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js" integrity="sha512-qzgd5cYSZcosqpzpn7zF2ZId8f/8CHmFKZ8j7mU4OUXTNRd5g+ZHBPsgKEwoqxCtdQvExE5LprwwPAgoicguNg==" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<nav>
+    <div class="nav-wrapper #424242 grey darken-3">
+        <a href="#" class="brand-logo ">Claims Tracker</a>
+        <ul id="nav-mobile" class="right hide-on-sm-and-down">
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="row mt-4">
+    <div class="col-md-5">
+        <h3>Add a New Bill</h3>
+
+        <form  method = "post" class="form new-bill-form">
+            <div class="form-group">
+                <label for="bill-name">✉️ Claim Name:</label>
+                <input th:field=${billFormDTO.name} class="form-input" type="text" id="bill-name" name="bill-name" />
+                <p th:errors="${billFormDTO.name}"></p>
+            </div>
+            <div class="form-group">
+                <label for="bill-amount">💰 Amount:</label>
+                <input th:field=${billFormDTO.amount} class="form-input" type="text" id="bill-amount" name="bill-amount" />
+                <p th:errors="${billFormDTO.amount}"></p>
+            </div>
+            <div class="form-group">
+                <label for="due-date">🗓️ Due Date:</label>
+                <input th:field=${billFormDTO.billDueDate} class="form-input datepicker" type="date" id="due-date" name="due-date" />
+                <p th:errors="${billFormDTO.billDueDate}"></p>
+            </div>
+            <div class="form-group">
+                <label for="bill-type">🗂️ Claim Type:</label>
+                <input th:field=${billFormDTO.type} class="form-input" type="text" id="bill-type" name="bill-type">
+                <p th:errors="${billFormDTO.type}"></p>
+            </div>
+            <div class="form-group">
+                <button value="Create" type="submit" class="btn btn-primary">Add</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

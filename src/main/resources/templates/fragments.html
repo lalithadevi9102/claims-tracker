@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Claims Tracker</title>
+  <link href="css/jass.css" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+  <link rel = "stylesheet"
+        href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+  <script type = "text/javascript"
+          src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js" integrity="sha512-qzgd5cYSZcosqpzpn7zF2ZId8f/8CHmFKZ8j7mU4OUXTNRd5g+ZHBPsgKEwoqxCtdQvExE5LprwwPAgoicguNg==" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+<th:block th:fragment="chart-script">
+  <script th:inline="javascript">
+
+    google.charts.load('current', {'packages':['corechart']});
+          google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+         timeframe = document.getElementById("thedropdown").value;
+
+<!--Populates array with parsed bill objects-->
+
+          const rawTypeAndAmountsObjArray = [];
+
+          const rawBillData = [[${chartBillData}]]
+          for (item in rawBillData) {
+            const parsed = JSON.parse(rawBillData[item]);
+            rawTypeAndAmountsObjArray.push(parsed);
+          }
+
+<!--Loops through bills and adds to new array, checks to see if type is in new array-->
+
+          const condensedTypeAndAmountsObjArray = [];
+
+          for (bill in rawTypeAndAmountsObjArray) {
+            const type = rawTypeAndAmountsObjArray[bill].type;
+            const amount = rawTypeAndAmountsObjArray[bill].amount;
+
+            let typeExistsInArray = false;
+
+<!--If type exists in array, add amount of current bill to existing type-->
+
+            if (condensedTypeAndAmountsObjArray.length > 0) {
+              for (let i = 0; i < condensedTypeAndAmountsObjArray.length; i++) {
+                if (type === condensedTypeAndAmountsObjArray[i].type) {
+                  typeExistsInArray = true;
+                  condensedTypeAndAmountsObjArray[i].amount += amount;
+                  break;
+                }
+              }
+            }
+
+            if (!typeExistsInArray) {
+              condensedTypeAndAmountsObjArray.push({type: type, amount: amount});
+            }
+          }
+
+          const chartData = [];
+          chartData.push(['Bill', 'Dollars']);
+
+<!--Convert object array to array of arrays-->
+
+          condensedTypeAndAmountsObjArray.map((item, index) => {
+            let innerChartData = [
+              item.type, item.amount
+            ];
+            chartData.push(innerChartData);
+          });
+
+
+
+        var data = google.visualization.arrayToDataTable(chartData);
+
+            var options = {
+              colors: ['orange','#00cc33', 'pink', 'yellow','lightblue'],
+              is3D: true,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+          }
+
+        // this function makes the chart responsive; include the name of the proper drawChart function; if more than one chart on page, include additional statements for each drawChart function
+        window.onresize = function() {
+        drawChart();
+        }
+
+    </script>
+</th:block>
+
+</body>
+</html>

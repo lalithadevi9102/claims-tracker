@@ -1,0 +1,35 @@
+ .chartContainer {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ flex-direction: column;
+ }
+
+ .chart {
+ width: 100%;
+ margin: 0;
+ padding: 0;
+ height: 600px;
+ }
+
+ #form1 {
+ }
+
+ #thedropdown {
+ }
+
+ rect {
+ margin: 0;
+ padding: 0;
+ height: 0%;
+ fill: grey;
+ }
+
+ svg {
+ margin-top: -100px;
+ padding: 0;
+ }
+
+ #totalExpenses {
+ margin-top: -200px;
+ }
